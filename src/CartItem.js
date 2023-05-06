@@ -2,27 +2,63 @@ import React from "react";
 import img from "./assets/dec.png";
 
 class CartItem extends React.Component {
-  // adding state it is js object
-  constructor() {
-    super();
-    this.state = {
-      price: 999,
-      title: "Mobile Phone",
-      qty: 1,
-      img: "",
-    };
+  
+
+  testing(){
+    const promise = new Promise((res,rej) => {
+      setTimeout(() => {
+        res('done');
+      },5000);
+    })
+    promise.then(()=> {
+      this.setState({qty:100});
+      console.log('state',this.state);
+    })
   }
 
   increaseQuantity = () => {
-    console.log('this',this.state)
-  }
-  
+    // this.state.qty += 1;
+    // console.log('this',this.state)
+
+    // //(object form of set state)
+    // this.setState({
+    //   qty: this.state.qty + 1
+    // })
+
+
+    ////(passing call back function)
+    this.setState((prevState) => {
+      return {
+        qty: prevState.qty + 1,
+      };
+    },() => {
+      console.log("this.state",this.state)
+    });
+   
+  };
+
+  decreaseQuantity = () => {
+    const { qty } = this.state;
+
+    if (qty === 0) {
+      return;
+    }
+
+    this.setState((prevState) => {
+      return {
+        qty: prevState.qty - 1,
+      };
+    });
+  };
   render() {
-    // object destructuring
-    const { price, title, qty } = this.state;
+
+    console.log('this.props',this.props);
+    // object destructuring    
+    const { price, title, qty } = this.props.product;
 
     return (
       <div className="cart-item">
+        {this.props.jsx}
         <div className="left-block">
           <img alt="" style={styles.image} />
         </div>
@@ -35,9 +71,16 @@ class CartItem extends React.Component {
               alt="increase"
               className="action-icons"
               src="https://media.istockphoto.com/id/688550958/vector/black-plus-sign-positive-symbol.jpg?s=612x612&w=0&k=20&c=0tymWBTSEqsnYYXWeWmJPxMotTGUwaGMGs6BMJvr7X4="
-              onClick ={this.increaseQuantity}
+              onClick={this.increaseQuantity}
             />
-            <img alt="decrease" className="action-icons" src={img} />
+
+            <img
+              alt="decrease"
+              className="action-icons"
+              src={img}
+              onClick={this.decreaseQuantity}
+            />
+
             <img
               alt="delete"
               className="action-icons"
