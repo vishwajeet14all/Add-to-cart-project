@@ -3,6 +3,7 @@ import React from "react";
 import Cart from "./Cart";
 import Navbar from "./navbar";
 
+
 class App extends React.Component {
   // adding state it is js object
   constructor() {
@@ -30,9 +31,11 @@ class App extends React.Component {
           img: "https://media.istockphoto.com/id/1157789866/photo/modern-computer-laptop-with-blank-screen-on-counter-barand-window-view.jpg?s=612x612&w=0&k=20&c=Idggc96ENAdz7R_ANTzvWpMTbaUcTV4JvJYKJHAD71A=",
           id: 3,
         },
-      ],
+      ]
     };
   }
+
+
 
   handleIncreaseQuantity = (product) => {
     console.log("Hey please inc the qty of ", product);
@@ -77,9 +80,8 @@ class App extends React.Component {
   getCartTotal = () => {
     const{products} = this.state;
     let cartTotal = 0;
-    products.map((product) => {
-      cartTotal = cartTotal + product.qty * product.price
-    })
+    products.map(product => cartTotal = cartTotal + product.qty * product.price
+    )
     return cartTotal;
   }
 
@@ -98,9 +100,6 @@ class App extends React.Component {
         />
 
         <h3>TOTAL : {this.getCartTotal()}</h3>
-
-
-
       </div>
     );
   }
